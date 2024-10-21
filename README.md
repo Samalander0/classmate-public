@@ -1,38 +1,14 @@
-# create-svelte
+# Classmate
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Classmate is an AI-powered essay feedback tool. Check it out at [classmate.app](https://www.classmate.app)!
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+This repo contains all of the frontend of Classmate and a majority of the backend as well.
 
 ## Developing
+Classmate uses Node/SvelteKit, with a Pocketbase backend. To use, you'll need to set up a Pocketbase backend (I use Railway), and you'll also need Google OAuth keys and an OpenAI API key.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+If you have any questions about development, or would like to create something similar, feel free to reach out to me on Discord @samaland3r or via email at sam@samcheng.co
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Photos
+<img width="1455" alt="image" src="https://github.com/user-attachments/assets/29c5cb14-73cc-4cc5-9597-28cd86453392">
+<img width="1451" alt="image" src="https://github.com/user-attachments/assets/b5908c8c-b277-4398-b197-b85e06938706">
