@@ -1,0 +1,449 @@
+.essay-main {
+  display: flex;
+  padding: 0 4rem 2rem 4rem;
+  gap: 2rem;
+
+  @media (max-width: 900px) {
+    flex-direction: column;
+    height: calc(100vh - 96px);
+  }
+  @media (max-width: 675px) {
+    padding: 0 2rem 2rem 2rem;
+  }
+  @media (max-width: 500px) {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+  }
+}
+body:has(.essay-main) {
+  background: #F4F4F5;
+}
+
+// Colors
+$yellow: #fff45f;
+$green: #85ff87;
+$blue: #84d6ff;
+$red: #ffb595;
+
+.essay {
+  background: white;
+  padding: 3rem;
+  border-radius: 8px;
+  border: 1px solid rgb(0 0 0 / 0.05);
+  max-width: 50rem;
+  overflow-y: scroll;
+  flex-grow: 1;
+
+  @media (min-width: 899px) {
+    height: calc(100vh - 2rem - 110px);
+    height: calc(100svh - 2rem - 110px);
+  }
+  @media (max-width: 900px) {
+    padding: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem 0;
+
+    @media (max-width: 900px) {
+      font-size: 2rem;
+    }
+  }
+
+  .general-feedback {
+    background: #FFF380;
+    padding: 2rem;
+    border-radius: 8px;
+    margin: 2rem 0;
+
+    @media (max-width: 900px) {
+      margin: 1rem 0;
+    }
+
+    h2 {
+      margin: 0;
+      font-weight: 550;
+      font-size: 1.25rem;
+    }
+
+    .general-content {
+      position: relative;
+
+      strong {
+        font-weight: 450;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        inset: 0 0 0 0;
+        background: linear-gradient(0deg, #FFF380, #FFF38000);
+      }
+    }
+
+    .general-feedback-button {
+      font: inherit;
+      padding: 0;
+      background: transparent;
+      border: none;
+
+      color: rgb(0 0 0 / 0.5);
+      text-decoration: underline solid rgb(0 0 0 / 0.2);
+
+      transition: opacity 0.2s ease;
+      &:hover {
+        cursor: pointer;
+        opacity: 0.8;
+      }
+    }
+
+    &.hidden {
+      .general-content {
+        max-height: 8rem;
+        overflow: hidden;
+      }
+      .general-feedback-button {
+        margin-top: 0.5rem;
+      }
+    }
+    &.expanded {
+      .general-content {
+        &:after {
+          opacity: 0;
+          pointer-events: none;
+        }
+      }
+    }
+  }
+
+  .essay-content {
+    &:focus {
+      background: #F1F5F999;
+      outline: 1rem solid #F1F5F999;
+      border-radius: 0.02px;
+    }
+  }
+
+  p {
+    line-height: 1.75em;
+  }
+
+  mark {
+    transition: 0.2s ease;
+
+    &.feedback, &:not(.star):not(.word-reduction):not(.grammar-spelling) {
+      background: transparentize($yellow, 0.25);
+      &:focus, &.highlighted {
+        background: $yellow;
+      }
+    }
+    &.star {
+      background: transparentize($green, 0.25);
+      &:focus, &.highlighted {
+        background: $green;
+      }
+    }
+    &.word-reduction {
+      background: transparentize($red, 0.25);
+      &:focus, &.highlighted {
+        background: $red;
+      }
+    }
+    &.grammar-spelling {
+      background: transparentize($blue, 0.25);
+      &:focus, &.highlighted {
+        background: $blue;
+      }
+    }
+
+    &.resolved {
+      background: transparent !important;
+    }
+
+    &:not(.resolved):hover {
+      cursor: pointer;
+      opacity: 0.9;
+    }
+  }
+
+  &:has(mark:focus) {
+    mark:not(:focus) {
+      &.feedback, &:not(.star):not(.word-reduction):not(.grammar-spelling) {
+        background: transparentize($yellow, 0.75);
+      }
+      &.star {
+        background: transparentize($green, 0.75);
+      }
+      &.word-reduction {
+        background: transparentize($red, 0.75);
+      }
+      &.grammar-spelling {
+        background: transparentize($blue, 0.75);
+      }
+    }
+  }
+  &:has(.highlighted) {
+    mark:not(.highlighted) {
+      &.feedback, &:not(.star):not(.word-reduction):not(.grammar-spelling) {
+        background: transparentize($yellow, 0.75);
+      }
+      &.star {
+        background: transparentize($green, 0.75);
+      }
+      &.word-reduction {
+        background: transparentize($red, 0.75);
+      }
+      &.grammar-spelling {
+        background: transparentize($blue, 0.75);
+      }
+    }
+  }
+}
+
+.toolbar {
+  height: 4rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background: white;
+  padding: 0.75rem 2rem;
+  width: 100%;  
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+
+  h3 {
+    margin: 0;
+    font-weight: 550;
+  }
+
+  .toolbar-buttons {
+    display: flex;
+    gap: 0.5rem;
+    height: 100%;
+
+    button {
+      height: 100%;
+      padding: 0 1rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      background: white;
+      border: 1px solid #E4E4E7;
+      border-radius: 4px;
+      font: inherit;
+
+      transition: 0.1s ease;
+
+      svg {
+        transition: 0.2s ease;
+      }
+      .loader-circle {
+        animation: rotate 1.5s linear infinite;
+
+        @keyframes rotate {
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      }
+
+      &:not(.disabled):hover {
+        background: #E4E4E7;
+        cursor: pointer;
+        opacity: 0.85;
+
+        svg {
+          transform: rotate(5deg);
+        }
+      }
+      &.active {
+        background: black;
+        border: 1px solid black;
+        color: white;
+
+        &:hover {
+          background: black;
+        }
+      }
+
+      &.disabled {
+        background: #E4E4E7;
+      }
+    }
+  }
+}
+
+.comments {
+  position: relative;
+  flex-grow: 1;
+
+  &:has(.toolbar) {
+    .comments-wrapper {
+      @media (min-width: 899px) {
+        height: calc(100vh - 2rem - 5rem - 110px);
+        height: calc(100svh - 2rem - 5rem - 110px);
+      }
+    }
+    &:before {
+      top: 5rem;
+    }
+  }
+
+  .comments-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow-y: scroll;
+
+    @media (min-width: 899px) {
+      height: calc(100vh - 2rem - 110px);
+      height: calc(100svh - 2rem - 110px);
+    }
+    @media (max-width: 900px) {
+      height: 30vh;
+    }
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2rem; 
+    background: linear-gradient(0deg, rgba(241,245,249,0) 0%, #F4F4F5 100%);
+    z-index: 4;
+    pointer-events: none;
+    transition: 0.5s ease;
+
+    @media (max-width: 900px) {
+      height: 0.5rem;
+    }
+  }
+  &:has(.at-top)::before {
+    opacity: 0;
+  }
+  &:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2rem;
+    background: linear-gradient(180deg, rgba(241,245,249,0) 0%, #F4F4F5 100%);
+    z-index: 4;
+    pointer-events: none;
+    transition: 0.5s ease;
+
+    @media (max-width: 900px) {
+      height: 0.5rem;
+    }
+  }
+  &:has(.at-bottom)::after {
+    opacity: 0;
+  }
+  
+  .comment {
+    background: #E5E5E5;
+    padding: 2rem;
+    border-radius: 8px;
+    border: 1px solid rgb(0 0 0 / 0.05);
+    transition: 0.2s ease;
+
+    @media (max-width: 550px) {
+      padding: 1.5rem;
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    .comment-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .info {
+        display: flex;
+        width: max-content;
+
+        .info-img {
+          width: 44px;
+          height: 44px;
+          border-radius: 5rem;
+          border: 1px solid rgb(0 0 0 / 0.1);
+          display: grid;
+          place-items: center;
+          margin: 0;
+          background: $yellow;
+
+          img {
+            width: 1.75rem;
+          }
+
+          &.star {
+            background: $green;
+          }
+          &.word-reduction {
+            background: $red;
+          }
+          &.grammar-spelling {
+            background: $blue;
+          }
+        }
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-left: 0.5rem;
+
+          h3 {
+            margin: 0;
+            font-size: 1rem;
+            font-weight: 500;
+            font-family: neue-haas-grotesk-text, sans-serif;
+            margin-bottom: 0.25rem;
+          }
+          p {
+            margin: 0;
+            opacity: 0.5;
+
+            @media (max-width: 1250px) {
+              font-size: 0.8rem;
+            }
+          }
+        }
+      }
+
+      .resolve {
+        padding: 0;
+        margin: 0;
+        border: none;
+        background: transparent;
+
+        &:hover {
+          cursor: pointer;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+
+  &:has(.highlighted) {
+    .comment {
+      &:not(.highlighted) {
+        opacity: 0.5;
+      }
+    }
+  }
+  &:has(.comment:focus) {
+    .comment {
+      &:not(:focus) {
+        opacity: 0.5;
+      }
+    }
+  }
+}

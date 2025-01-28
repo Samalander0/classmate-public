@@ -1,0 +1,22 @@
+$yellow: #fff45f;
+$green: #85ff87;
+$blue: #84d6ff;
+$red: #ffb595;
+$orange: #ffd07e;
+$bg-secondary: #FAFAFA;
+$text-light: #737373;
+
+
+@mixin x-padding {
+  padding-left: 4rem;
+  padding-right: 4rem;
+
+  @media (max-width: 675px) {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  @media (max-width: 500px) {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
